@@ -1,6 +1,6 @@
-const debug_log = (message) => {
+function logMessage(message) {
   console.log(`[proofpointless] ${message}`);
-};
+}
 
 function spliceBetweenTags(s, startTag, endTag) {
   let start = s.indexOf(startTag);
@@ -53,14 +53,14 @@ messenger.tabs.onCreated.addListener(async (tab) => {
 
   if (composeDetails.isPlainText) {
     const processedText = processText(composeDetails.plainTextBody);
-    debug_log(`processText removed ${composeDetails.plainTextBody.length - processedText.length} characters`);
+    logMessage(`processText removed ${composeDetails.plainTextBody.length - processedText.length} characters`);
     await messenger.compose.setComposeDetails(tab.id, {
       plainTextBody: processedText,
       isModified: false
     });
   } else {
     const processedHtml = processHtml(composeDetails.body);
-    debug_log(`processHtml removed ${composeDetails.body.length - processedHtml.length} characters`);
+    logMessage(`processHtml removed ${composeDetails.body.length - processedHtml.length} characters`);
     await messenger.compose.setComposeDetails(tab.id, {
       body: processedHtml,
       isModified: false
